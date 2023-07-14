@@ -4,6 +4,7 @@ import 'package:mvvm_clone/data/response/status.dart';
 import 'package:mvvm_clone/repository/registration_repository/registration_repository.dart';
 import 'package:mvvm_clone/res/routes/routes_name.dart';
 import 'package:mvvm_clone/screen_models/controller/user_preference/user_preferences_view_model.dart';
+import 'package:mvvm_clone/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:mvvm_clone/utils/utils.dart';
 
 class RegistrationController extends GetxController {
@@ -56,7 +57,7 @@ class RegistrationController extends GetxController {
         } else {
           userPreferences.saveUser(value["token"]["access"]);
           Util.Snack_Bar("Successful", "Registration Successfully");
-          Get.toNamed(RoutesName.home_screen);
+          Get.to(() => BottomNavigation(index: 0));
           Status status = Status.LOADING;
         }
       }).onError((error, stackTrace) {

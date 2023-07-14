@@ -1,10 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:mvvm_clone/data/network/network_api_services.dart';
-import 'package:mvvm_clone/models/home/user_list_model.dart';
 
 import '../../res/app_url/app_url.dart';
 
-class HomeRepository {
+class PlayListRepository {
   final _apiServices = NetworkApiServices();
   Future<dynamic> userListApi() async {
     dynamic response = await _apiServices.getApi(AppUrl.playlist_url);

@@ -10,11 +10,11 @@ class UserPreferences extends GetxController {
     return true;
   }
 
-  Future<UserModel> getUser() async {
+  Future<String?> getUser() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     String? token = sp.getString('token');
 
-    return UserModel(token: token);
+    return token;
   }
 }
 

@@ -4,6 +4,7 @@ import 'package:mvvm_clone/data/response/status.dart';
 import 'package:mvvm_clone/models/login/user_model.dart';
 import 'package:mvvm_clone/repository/login_repository/login_repository.dart';
 import 'package:mvvm_clone/res/routes/routes_name.dart';
+import 'package:mvvm_clone/screens/bottom_navigation_screen/bottom_navigation_screen.dart';
 import 'package:mvvm_clone/utils/utils.dart';
 import 'package:mvvm_clone/screen_models/controller/user_preference/user_preferences_view_model.dart';
 
@@ -20,6 +21,14 @@ class LoginScreenController extends GetxController {
 
   void setRequestStatus(Status value) => request_status.value = value;
   void setError(String value) => error.value = value;
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+    email_controller.value.text = "ahmad@gmail.com";
+    password_controller.value.text = "12345678";
+  }
 
   void loginApi() {
     if (!email_controller.value.text.contains("@")) {
@@ -42,7 +51,7 @@ class LoginScreenController extends GetxController {
               .saveUser(value["token"]["access"])
               .then((value) => null)
               .onError((error, stackTrace) => null);
-          Get.toNamed(RoutesName.home_screen);
+          Get.to(() => BottomNavigation(index: 0));
           print(value["token"]["access"]);
           Util.Snack_Bar("login", "Login Successfully");
         }

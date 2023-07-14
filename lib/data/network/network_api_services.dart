@@ -6,10 +6,29 @@ import 'package:flutter/foundation.dart';
 import 'package:mvvm_clone/data/app_exceptions.dart';
 import 'package:mvvm_clone/data/network/base_api_services.dart';
 import 'package:http/http.dart' as http;
+import 'package:mvvm_clone/screen_models/controller/user_preference/user_preferences_view_model.dart';
 
 class NetworkApiServices extends BaseApiServices {
+  String user_token = '';
+  bool isTokenEmpty = true;
+  UserPreferences userPreferences = UserPreferences();
+
+  Future<void> setToken() async {
+    await userPreferences.getUser().then((value) {
+      if (value != null) {
+        user_token = value;
+        isTokenEmpty = false;
+      }
+    }).onError((error, stackTrace) {
+      print("Error while setting token $error");
+    });
+  }
+
   @override
   Future<dynamic> getApi(String url) async {
+    await setToken();
+    print("the token of the user sius");
+    print(user_token);
     if (kDebugMode) {
       print(url);
     }
@@ -17,8 +36,9 @@ class NetworkApiServices extends BaseApiServices {
     dynamic response_JSON;
 
     try {
-      final response =
-          await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+      final response = await http.get(Uri.parse(url), headers: {
+        "Authorization": "Bearer $user_token",
+      }).timeout(const Duration(seconds: 10));
       response_JSON = return_response(response);
     } on SocketException {
       throw InternetException();
@@ -34,6 +54,9 @@ class NetworkApiServices extends BaseApiServices {
 
   @override
   Future<dynamic> postApi(var data, String url) async {
+    await setToken();
+    print("the token of the user sius");
+    print(user_token);
     if (kDebugMode) {
       print(url);
     }
@@ -42,7 +65,11 @@ class NetworkApiServices extends BaseApiServices {
 
     try {
       final response = await http
-          .post(Uri.parse(url), body: data)
+          .post(Uri.parse(url),
+              headers: {
+                "Authorization": "Bearer $user_token",
+              },
+              body: data)
           // jsonEncode(
           //     data)) // in raw data the data will encode and if it form data then we remove jsonEncode
           .timeout(const Duration(seconds: 10));
