@@ -3,9 +3,9 @@ import 'package:mvvm_clone/models/login/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences extends GetxController {
-  Future<bool> saveUser(UserModel responseModel) async {
+  Future<bool> saveUser(String token) async {
     SharedPreferences sp = await SharedPreferences.getInstance();
-    sp.setString('token', responseModel.token.toString());
+    sp.setString('token', token);
 
     return true;
   }

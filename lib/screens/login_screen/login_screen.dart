@@ -218,8 +218,8 @@ class _Login_ScreenState extends State<Login_Screen> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Get.toNamed(RoutesName.registration_screen,
-                                //     arguments: {"isScreen": "registration"});
+                                Get.toNamed(RoutesName.registration_screen,
+                                    arguments: {"isScreen": "registration"});
                               },
                               child: Center(
                                 child: Text.rich(

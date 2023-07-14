@@ -39,10 +39,11 @@ class LoginScreenController extends GetxController {
         } else {
           setRequestStatus(Status.LOADING);
           userPreferences
-              .saveUser(UserModel.fromJson(value["token"]["access"]))
+              .saveUser(value["token"]["access"])
               .then((value) => null)
               .onError((error, stackTrace) => null);
           Get.toNamed(RoutesName.home_screen);
+          print(value["token"]["access"]);
           Util.Snack_Bar("login", "Login Successfully");
         }
       }).onError((error, stackTrace) {
