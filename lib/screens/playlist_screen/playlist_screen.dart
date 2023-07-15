@@ -34,8 +34,9 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
+            padding: EdgeInsets.only(bottom: 20.h),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   child: AppBar(
@@ -65,7 +66,50 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                             padding: EdgeInsets.zero,
                             itemCount: controller.playlist.length,
                             itemBuilder: (context, index) {
-                              return Text("data");
+                              return Column(
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      print(controller.playlist[index]['id']);
+                                    },
+                                    child: Container(
+                                      width: double.infinity,
+                                      height: 270.h,
+                                      child: Image.network(
+                                        "http://10.0.2.2:8000//${controller.playlist[index]["PlaylistImage"]}",
+                                      ),
+                                    ),
+                                  ),
+                                  Container(
+                                    color: AppColor.black,
+                                    height: 45.h,
+                                    child: Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 20.w,
+                                        ),
+                                        Text(
+                                          controller.playlist[index]
+                                              ["PlaylistTitle"],
+                                          style: TextStyle(
+                                              color: AppColor.whiteA700,
+                                              fontSize: 25.sp),
+                                        ),
+                                        Spacer(),
+                                        Text(
+                                          controller.home_controller.name.value,
+                                          style: TextStyle(
+                                              color: AppColor.whiteA700,
+                                              fontSize: 25.sp),
+                                        ),
+                                        SizedBox(
+                                          width: 20.w,
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              );
                             }),
                       );
                     case Status.ERROR:

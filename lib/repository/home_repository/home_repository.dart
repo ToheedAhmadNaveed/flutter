@@ -13,4 +13,12 @@ class HomeRepository {
     }
     return response;
   }
+
+  Future<dynamic> userProfileApi() async {
+    dynamic response = await _apiServices.getApi(AppUrl.user_profile);
+    if (kDebugMode) {
+      print(response);
+    }
+    return response;
+  }
 }

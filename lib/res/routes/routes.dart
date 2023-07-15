@@ -29,6 +29,6 @@ class AppRoutes {
         GetPage(
           name: RoutesName.user_name_screen,
           page: () => UserNameScreen(),
-        )
+        ),
       ];
 }

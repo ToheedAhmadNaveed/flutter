@@ -3,6 +3,7 @@ import 'package:get/get_connect/http/src/request/request.dart';
 import 'package:mvvm_clone/models/home/user_list_model.dart';
 import 'package:mvvm_clone/repository/home_repository/home_repository.dart';
 import 'package:mvvm_clone/repository/playlist_repository/playlist_repository.dart';
+import 'package:mvvm_clone/screen_models/controller/home/home_view_model.dart';
 
 import '../../../data/response/status.dart';
 
@@ -10,6 +11,7 @@ class PlayListController extends GetxController {
   final _api = PlayListRepository();
   final request_status = Status.LOADING.obs;
   final user_list = UserList().obs;
+  final home_controller = Get.find<HomeController>();
   RxString error = ''.obs;
   RxList playlist = [].obs;
 

@@ -34,16 +34,27 @@ class NetworkApiServices extends BaseApiServices {
     }
 
     dynamic response_JSON;
-
-    try {
-      final response = await http.get(Uri.parse(url), headers: {
-        "Authorization": "Bearer $user_token",
-      }).timeout(const Duration(seconds: 10));
-      response_JSON = return_response(response);
-    } on SocketException {
-      throw InternetException();
-    } on TimeoutException {
-      throw RequestTimeOut();
+    if (isTokenEmpty == false) {
+      try {
+        final response = await http.get(Uri.parse(url), headers: {
+          "Authorization": "Bearer $user_token",
+        }).timeout(const Duration(seconds: 10));
+        response_JSON = return_response(response);
+      } on SocketException {
+        throw InternetException();
+      } on TimeoutException {
+        throw RequestTimeOut();
+      }
+    } else {
+      try {
+        final response =
+            await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+        response_JSON = return_response(response);
+      } on SocketException {
+        throw InternetException();
+      } on TimeoutException {
+        throw RequestTimeOut();
+      }
     }
 
     if (kDebugMode) {
@@ -62,22 +73,36 @@ class NetworkApiServices extends BaseApiServices {
     }
 
     dynamic responseJson;
-
-    try {
-      final response = await http
-          .post(Uri.parse(url),
-              headers: {
-                "Authorization": "Bearer $user_token",
-              },
-              body: data)
-          // jsonEncode(
-          //     data)) // in raw data the data will encode and if it form data then we remove jsonEncode
-          .timeout(const Duration(seconds: 10));
-      responseJson = return_response(response);
-    } on SocketException {
-      throw InternetException();
-    } on TimeoutException {
-      throw RequestTimeOut();
+    if (isTokenEmpty == false) {
+      try {
+        final response = await http
+            .post(Uri.parse(url),
+                headers: {
+                  "Authorization": "Bearer $user_token",
+                },
+                body: data)
+            // jsonEncode(
+            //     data)) // in raw data the data will encode and if it form data then we remove jsonEncode
+            .timeout(const Duration(seconds: 10));
+        responseJson = return_response(response);
+      } on SocketException {
+        throw InternetException();
+      } on TimeoutException {
+        throw RequestTimeOut();
+      }
+    } else {
+      try {
+        final response = await http
+            .post(Uri.parse(url), body: data)
+            // jsonEncode(
+            //     data)) // in raw data the data will encode and if it form data then we remove jsonEncode
+            .timeout(const Duration(seconds: 10));
+        responseJson = return_response(response);
+      } on SocketException {
+        throw InternetException();
+      } on TimeoutException {
+        throw RequestTimeOut();
+      }
     }
 
     return responseJson;
