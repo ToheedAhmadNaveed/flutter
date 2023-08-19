@@ -7,4 +7,5 @@ class AppUrl {
   static const String playlist_url = "$base_url/api/dvideo/playlistapis/";
   static const String user_profile = "$base_url/api/user/profile/";
   static const String playlist_video = "$base_url/api/dvideo/getplaylistvideo/";
+  static const String video_player_video = "$base_url/api/dvideo/videosapi/";
 }

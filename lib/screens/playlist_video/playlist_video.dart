@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:mvvm_clone/data/response/status.dart';
 import 'package:mvvm_clone/res/assets/image_constant.dart';
 import 'package:mvvm_clone/res/colors/app_color.dart';
+import 'package:mvvm_clone/res/routes/routes_name.dart';
 import 'package:mvvm_clone/screen_models/controller/playlist_video/playlist_video_controller.dart';
 
 class PlaylistVideo extends StatefulWidget {
@@ -84,12 +85,14 @@ class _PlaylistVideoState extends State<PlaylistVideo> {
                                     children: [
                                       InkWell(
                                         onTap: () {
-                                          // print(controller.playlist[index]['id']);
-                                          // Get.toNamed(RoutesName.playlist_video,
-                                          //     arguments: {
-                                          //       "id": controller.playlist[index]
-                                          //           ['id']
-                                          //     });
+                                          print(controller.playlist_video[index]
+                                              ['id']);
+                                          Get.toNamed(
+                                              RoutesName.video_player_screen,
+                                              arguments: {
+                                                "id": controller
+                                                    .playlist_video[index]['id']
+                                              });
                                         },
                                         child: Container(
                                           width: double.infinity,

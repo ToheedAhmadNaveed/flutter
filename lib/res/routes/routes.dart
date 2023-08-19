@@ -6,6 +6,7 @@ import 'package:mvvm_clone/screens/playlist_video/playlist_video.dart';
 import 'package:mvvm_clone/screens/registration_screen/registration_screen.dart';
 import 'package:mvvm_clone/screens/splash_screen.dart';
 import 'package:mvvm_clone/screens/user_name_screen/user_name_screen.dart';
+import 'package:mvvm_clone/screens/video_player/video_player_screen.dart';
 
 class AppRoutes {
   static appRoutes() => [
@@ -34,6 +35,10 @@ class AppRoutes {
         GetPage(
           name: RoutesName.playlist_video,
           page: () => PlaylistVideo(),
+        ),
+        GetPage(
+          name: RoutesName.video_player_screen,
+          page: () => VideoPlayerScreen(),
         ),
       ];
 }
